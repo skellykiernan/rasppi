@@ -1,0 +1,22 @@
+installs
+  - sudo apt-get install isc-dhcp-server
+Network
+  - configured eth0 to be static 192.168.7.77 (using ubunutu network configurations)
+  - configured the dhcpd to lease addresses starting at 192.168.7.10 ( see file /etc/dhcp/dhcpd.conf)
+Login
+  - start the dhcpd
+
+sudo dhcpd
+
+  - first check the ip address, see what dhcp leases there are in the file /var/lib/dhcp/dhcpd.leases 
+  - following command will allow login if using the ip address 192.168.7.10
+  
+ sshpass -p raspberry ssh pi@192.168.7.10
+
+
+## Setup for cross development
+  - see http://hertaville.com/2012/09/28/development-environment-raspberry-pi-cross-compiler/
+sudo apt-get install build-essential git
+  - download the cross compile git clone git://github.com/raspberrypi/tools.git 
+  - located in /home/skelly/wkspace/rasppi/tools
+
