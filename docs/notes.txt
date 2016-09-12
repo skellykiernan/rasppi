@@ -8,15 +8,26 @@ Login
 
 sudo dhcpd
 
-  - first check the ip address, see what dhcp leases there are in the file /var/lib/dhcp/dhcpd.leases 
+  - first check the ip address, see what dhcp leases there are in the file /var/lib/dhcp/dhcpd.leases
   - following command will allow login if using the ip address 192.168.7.10
-  
+
  sshpass -p raspberry ssh pi@192.168.7.10
 
 
 ## Setup for cross development
   - see http://hertaville.com/2012/09/28/development-environment-raspberry-pi-cross-compiler/
 sudo apt-get install build-essential git
-  - download the cross compile git clone git://github.com/raspberrypi/tools.git 
+  - download the cross compile git clone git://github.com/raspberrypi/tools.git
   - located in /home/skelly/wkspace/rasppi/tools
+
+
+## copied raspian card form sd
+
+  - Copied
+
+sudo dd if=/dev/sdb of=raspbian20160911.bin
+
+  - Wrote to new disk( pv allows to monitor progress)
+
+sudo dd bs=1M if=raspbian20160911.bin | pv | sudo dd bs=1M of=/dev/sdb
 
