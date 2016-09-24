@@ -12,9 +12,11 @@ btnPin=17
 GPIO.setup(ledPin, GPIO.OUT)
 GPIO.setup(btnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+# Flash on LED to show circuit OK
 GPIO.output(ledPin, True)
 time.sleep(0.5)
 GPIO.output(ledPin, False)
+
 try:
     while True:
         btnState = GPIO.input(btnPin)
