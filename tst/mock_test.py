@@ -16,7 +16,7 @@ def test_func(value):
 
 class MockExampleTest(unittest.TestCase):
     """docstring for MockExampleTest"""
-       
+
     def test_mock_func_example(self):
         """docstring for test_Simple"""
         input_value    = 3
@@ -26,11 +26,11 @@ class MockExampleTest(unittest.TestCase):
         global inner_increment
         inner_increment = MagicMock(return_value=4)
         # call under test
-        ret_value  = test_func(3)
+        ret_value  = test_func(input_value)
 
         # check that the mock was called as expected
         inner_increment.assert_called_with(3)
-        self.assertEqual(ret_value, 4)
+        self.assertEqual(ret_value, expected_value)
 
 #~### Start of Execution
 if __name__ == '__main__':

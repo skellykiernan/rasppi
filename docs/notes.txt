@@ -1,25 +1,42 @@
 installs
   - sudo apt-get install isc-dhcp-server
 Network
-  - configured eth0 to be static 192.168.7.77 (using ubunutu network configurations)
-  - configured the dhcpd to lease addresses starting at 192.168.7.10 ( see file /etc/dhcp/dhcpd.conf)
+  - configured eth0 to be static 10.42.0.7 (using ubunutu network configurations, file /etc/network/interfaces)
+  - configured the network to be shared, 
+  - do not think needing ip_forwaring (/etc/sysctl.conf or sudo sysctl -w net.ipv4.ip_forward=1)
+  - configured the dhcpd to lease addresses starting at 10.42.0.10 ( see file /etc/dhcp/dhcpd.conf)
+  -    ( ensure that router is set to the  static ip_address)
 Login
   - start the dhcpd
+
+  looking at itfanatic.com/?q=node/84 for dhcpd.conf
+  changed name-server to 192.168.0.1 ( sKy router)
 
 sudo dhcpd
 
   - first check the ip address, see what dhcp leases there are in the file /var/lib/dhcp/dhcpd.leases
-  - following command will allow login if using the ip address 192.168.7.10
+  - following command will allow login if using the ip address 10.42.0.80
 
- sshpass -p raspberry ssh pi@192.168.7.10
+ sshpass -p raspberry ssh pi@10.42.0.80
+ 
+# Hostapd following adafruit refernce
 
+# for setting up rasppi with flash the following referneces
+ - https://learn.adafruit.com/raspipe-a-raspberry-pi-pipeline-viewer-part-2/miniature-web-applications-in-python-with-flask
+ - http://mattrichardson.com/Raspberry-Pi-Flask/
+ - https://github.com/ThumbGen/ropi
+
+ Modified the adafruit example, downloaded from github (git clone https://github.com/adafruit/Adafruit-RasPipe.git)
+ Files modfied , flask_listener.py ( added a dummy RasPipe class as not interacting with TFT) 
+                 also uses the templates index
 
 ## Setup for cross development
   - see http://hertaville.com/2012/09/28/development-environment-raspberry-pi-cross-compiler/
 sudo apt-get install build-essential git
   - download the cross compile git clone git://github.com/raspberrypi/tools.git
   - located in /home/skelly/wkspace/rasppi/tools
-
+  - install GPIO module for the raspberry Pi
+sudo apt-get install python-dev python-rpi.gpio
 
 ## copied raspian card form sd
 
@@ -31,3 +48,11 @@ sudo dd if=/dev/sdb of=raspbian20160911.bin
 
 sudo dd bs=1M if=raspbian20160911.bin | pv | sudo dd bs=1M of=/dev/sdb
 
+## Coding
+ With the sunfounder kit ( Super kit for Raspberry Pi) see
+   - https://github.com/sunfounder/Sunfounder_SuperKit_C_code_for_RaspberryPi
+   - https://github.com/sunfounder/Sunfounder_SuperKit_Python_code_for_RaspberryPi
+
+also zerogpio looks vrey interesting
+    https://github.com/RPi-Distro/python-gpiozero
+    http://gpiozero.readthedocs.io/
