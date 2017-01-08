@@ -25,6 +25,11 @@ sudo dhcpd
  - https://learn.adafruit.com/raspipe-a-raspberry-pi-pipeline-viewer-part-2/miniature-web-applications-in-python-with-flask
  - http://mattrichardson.com/Raspberry-Pi-Flask/
  - https://github.com/ThumbGen/ropi
+ - http://www.instructables.com/id/Raspberry-Pi-2-WiFi-RC-Car/?ALLSTEPS ( Not Flask but interseting GUI)
+
+But basing on this
+https://github.com/CJAndrade/Toy-Truck-powered-by-Raspberry-Pi/blob/master/controller.py
+http://www.instructables.com/id/Toy-Truck-Powered-by-Raspberry-Pi/step10/Download-the-zip-attached-and-Run-the-python-progr/
 
  Modified the adafruit example, downloaded from github (git clone https://github.com/adafruit/Adafruit-RasPipe.git)
  Files modfied , flask_listener.py ( added a dummy RasPipe class as not interacting with TFT) 

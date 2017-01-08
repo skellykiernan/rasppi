@@ -10,10 +10,12 @@ help() {
     echo "commands:"
     echo " start\t start services to connect to rasppi"
     echo " stop\t stop services assoicated with rasppi"
+    echo " sync_to\t sync source code to the rasppi"
     echo " help\t display this help"
     echo ""
     echo "example:"
     echo " sudo ./rasppi.sh start"
+    echo " ./rasppi.sh sync_to"
     echo " sudo ./rasppi.sh stop"
     echo ""
 }
@@ -28,6 +30,12 @@ start_rasppi() {
     # select ip address
     # start a shell and connect
     #function_boy
+}
+
+sync_to_rasppi() {
+    # TODO nice to have the ip address from start
+    rsync -avz -e ssh src/ pi@10.42.0.80:wkspace/
+    echo "PARTLY IMPLEMENTED"
 }
 
 stop_rasppi() {
@@ -49,6 +57,9 @@ case $command in
         ;;
     stop)
         stop_rasppi
+        ;;
+    sync_to)
+        sync_to_rasppi
         ;;
     help)
         help
