@@ -25,16 +25,29 @@ start_rasppi() {
     # start dhcpd
     chown root /var/lib/dhcp/dhcpd.leases
     dhcpd
-    echo "PARTLY IMPLEMENTED"
-    # list possible ip addresses in menu
-    # select ip address
-    # start a shell and connect
-    #function_boy
+
+    rasppi_ip_addr=""
+    while [ -z $rasppi_ip_addr ]; do
+        echo "scanning - Ensure Rasppi is Powered On and connected"
+        echo ""
+        rasppi_ip_addr=$(nmap -nsP 10.42.0.10-100 2>/dev/null -oG - | grep "Up$" | awk '{printf "%s ", $2}')
+    done
+
+    echo 'rasppi_ip_addr="'"$rasppi_ip_addr"'"' > rasppi_ip_addr.file
+    echo "think rasppi_ip_addr is $rasppi_ip_addr"
+    gnome-terminal -e "sshpass -p raspberry ssh pi@$rasppi_ip_addr"
 }
 
 sync_to_rasppi() {
-    # TODO nice to have the ip address from start
-    rsync -avz -e ssh src/ pi@10.42.0.80:wkspace/
+    rasppi_ip_addr="10.42.0.80"
+    if [ -e "./rasppi_ip_addr.file" ]; then
+        . ./rasppi_ip_addr.file
+        # strip blanks in the variable
+        rasppi_ip_addr=$(echo $rasppi_ip_addr | sed 's/ //g')
+    fi
+
+    echo "think rasppi_ip_addr is $rasppi_ip_addr"
+    rsync -avz -e ssh src/ pi@${rasppi_ip_addr}:wkspace/
     echo "PARTLY IMPLEMENTED"
 }
 
